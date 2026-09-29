@@ -703,6 +703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   turnAngle: 15
   torque: 1000
+  breakTorque: 1
   frontLeftWheel: {fileID: 2046739360}
   frontRightWheel: {fileID: 103898698}
 --- !u!1 &397756705
@@ -1044,7 +1045,7 @@ WheelCollider:
   m_Radius: 0.25
   m_SuspensionSpring:
     spring: 70000
-    damper: 500
+    damper: 1000
     targetPosition: 0.5
   m_SuspensionDistance: 0.15
   m_ForceAppPointDistance: 0
@@ -1229,10 +1230,10 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782919531}
   serializedVersion: 5
-  m_Mass: 5000
+  m_Mass: 3000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_CenterOfMass: {x: 0, y: -0.5, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
@@ -1241,7 +1242,7 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
+  m_ImplicitCom: 0
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -1262,6 +1263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarController
   turnAngle: 15
   torque: 2000
+  breakTorque: 4000
   frontLeftWheel: {fileID: 1638641198}
   frontRightWheel: {fileID: 1911230817}
 --- !u!114 &782919535
@@ -2494,7 +2496,7 @@ WheelCollider:
   m_Radius: 0.25
   m_SuspensionSpring:
     spring: 70000
-    damper: 500
+    damper: 1000
     targetPosition: 0.5
   m_SuspensionDistance: 0.15
   m_ForceAppPointDistance: 0
@@ -2695,7 +2697,7 @@ WheelCollider:
   m_Radius: 0.25
   m_SuspensionSpring:
     spring: 70000
-    damper: 500
+    damper: 1000
     targetPosition: 0.5
   m_SuspensionDistance: 0.15
   m_ForceAppPointDistance: 0
@@ -2766,7 +2768,7 @@ WheelCollider:
   m_Radius: 0.25
   m_SuspensionSpring:
     spring: 70000
-    damper: 500
+    damper: 1000
     targetPosition: 0.5
   m_SuspensionDistance: 0.15
   m_ForceAppPointDistance: 0
