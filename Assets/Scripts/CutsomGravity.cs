@@ -5,9 +5,7 @@ public class CutsomGravity : MonoBehaviour
 {
     Rigidbody rigidbody;
     [SerializeField]
-    float gravityScale = 1f;
-    float globalgravity = -9.82f;
-    
+    float gravityScale = 1f;    
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();

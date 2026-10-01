@@ -55,7 +55,7 @@ public class CarController : MonoBehaviour
                 }
                 wheel.brakeTorque = 0;
             }
-        print(wheel.motorTorque + ":" + wheel.brakeTorque);
+        // print(wheel.motorTorque + ":" + wheel.brakeTorque);
         }
         frontRightWheel.steerAngle = turnAngle * steering;
         frontLeftWheel.steerAngle = turnAngle * steering;
