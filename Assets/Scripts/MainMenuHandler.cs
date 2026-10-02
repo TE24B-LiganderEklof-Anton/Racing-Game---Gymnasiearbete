@@ -22,7 +22,5 @@ public class MainMenuHandler : MonoBehaviour
     public void OnRecordDataToggleChange(Toggle toggle)
     {
         DataHandler.instance.recordData = toggle.isOn;
-        print(DataHandler.instance.recordData);
     }
-
 }
