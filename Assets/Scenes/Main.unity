@@ -1061,7 +1061,7 @@ Transform:
   m_GameObject: {fileID: 782919531}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.5643471, z: -0, w: 0.8255376}
-  m_LocalPosition: {x: 290.37573, y: 490.58, z: -310.30716}
+  m_LocalPosition: {x: 150.89336, y: 329.28, z: -493.94986}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2234,6 +2234,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 357864177}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &1289070797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6791394240800033955, guid: f297fc0d9df1aa441aff93a6e7ebc819, type: 3}
+  m_PrefabInstance: {fileID: 1511866363}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1289070801
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289070797}
+  m_Material: {fileID: 13400000, guid: 82b6640efa09f614eb5d9f16c4427433, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3127029668700008691, guid: f297fc0d9df1aa441aff93a6e7ebc819, type: 3}
 --- !u!1 &1340191326 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2241482502837186444, guid: f297fc0d9df1aa441aff93a6e7ebc819, type: 3}
@@ -2344,6 +2371,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2241482502837186444, guid: f297fc0d9df1aa441aff93a6e7ebc819, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1340191330}
+    - targetCorrespondingSourceObject: {fileID: -6791394240800033955, guid: f297fc0d9df1aa441aff93a6e7ebc819, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1289070801}
   m_SourcePrefab: {fileID: 100100000, guid: f297fc0d9df1aa441aff93a6e7ebc819, type: 3}
 --- !u!1001 &1546004350
 PrefabInstance:
