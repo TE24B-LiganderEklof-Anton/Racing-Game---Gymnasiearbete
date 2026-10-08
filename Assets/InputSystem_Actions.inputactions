@@ -98,12 +98,12 @@
                 },
                 {
                     "name": "Drive",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "80455aee-27a8-4fff-acbb-0e980fc79512",
-                    "expectedControlType": "",
+                    "expectedControlType": "Digital",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false,
+                    "initialStateCheck": true,
                     "priority": 0
                 }
             ],
@@ -505,7 +505,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "1D Axis",
+                    "name": "WS",
                     "id": "c8c213eb-3233-4476-a684-86155716a4b1",
                     "path": "1DAxis",
                     "interactions": "",
@@ -533,6 +533,50 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
+                    "action": "Drive",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "825649a7-7dfe-4ea5-9835-df470afb350f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drive",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "LTRT",
+                    "id": "7a7e95a4-dcde-4abd-9f71-f68c4a2495a2",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drive",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "f41232d0-bc86-4ae1-8291-e95e2794bab8",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Drive",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "915b456a-820e-498c-adb1-94cb02004729",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
                     "action": "Drive",
                     "isComposite": false,
                     "isPartOfComposite": true
