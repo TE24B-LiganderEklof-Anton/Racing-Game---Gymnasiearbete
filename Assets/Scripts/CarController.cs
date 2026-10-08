@@ -1,3 +1,4 @@
+using Unity.Collections.Tests.CoreCLR.TestJobs;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -57,7 +58,7 @@ public class CarController : MonoBehaviour
                 }
                 else if (speed > -1 && speed < 1)
                 {
-                    wheel.brakeTorque = 1000;
+                    wheel.brakeTorque = breakTorque;
                 }
             }
             // print(wheel.motorTorque + ":" + wheel.brakeTorque);
@@ -79,15 +80,26 @@ public class CarController : MonoBehaviour
 
         }
     }
+    // public void OnMove(InputValue input)
+    // {
+    //     Vector2 moveVector = input.Get<Vector2>();
+    //     forward = moveVector.y;
+    //     steering = moveVector.x;
+
+    // }
+    public void OnDrive(InputValue input)
+    {
+        forward = input.Get<float>();
+    }
     public void OnMove(InputValue input)
     {
-        Vector2 moveVector = input.Get<Vector2>();
-        forward = moveVector.y;
-        steering = moveVector.x;
-
+        // steering = input.Get<Vector2>().x;
+        float inputValue = input.Get<Vector2>().x;
+        steering = 1-Mathf.Cos(inputValue*Mathf.PI/2);
+        if (inputValue < 0)
+        {
+            steering *= -1;
+        }
+        // print(inputValue + ":" + steering);
     }
-    // public void OnDrive(InputValue input)
-    // {
-    //     print(input.Get<float>());
-    // }
 }
