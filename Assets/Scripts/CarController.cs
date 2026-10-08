@@ -48,14 +48,19 @@ public class CarController : MonoBehaviour
                 if (forward > 0)
                 {
                     wheel.motorTorque = torque * forward;
+                    wheel.brakeTorque = 0;
                 }
-                if (forward < 0)
+                else if (forward < 0)
                 {
                     wheel.motorTorque = torque * forward * 0.8f;
+                    wheel.brakeTorque = 0;
                 }
-                wheel.brakeTorque = 0;
+                else if (speed > -1 && speed < 1)
+                {
+                    wheel.brakeTorque = 1000;
+                }
             }
-        // print(wheel.motorTorque + ":" + wheel.brakeTorque);
+            // print(wheel.motorTorque + ":" + wheel.brakeTorque);
         }
         frontRightWheel.steerAngle = turnAngle * steering;
         frontLeftWheel.steerAngle = turnAngle * steering;
@@ -73,8 +78,6 @@ public class CarController : MonoBehaviour
             transform.rotation = rot;
 
         }
-
-        // rigidBody.linearVelocity *= 0.99f;
     }
     public void OnMove(InputValue input)
     {
@@ -83,4 +86,8 @@ public class CarController : MonoBehaviour
         steering = moveVector.x;
 
     }
+    // public void OnDrive(InputValue input)
+    // {
+    //     print(input.Get<float>());
+    // }
 }
