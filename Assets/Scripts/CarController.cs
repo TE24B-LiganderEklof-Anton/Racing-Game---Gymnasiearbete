@@ -18,6 +18,7 @@ public class CarController : MonoBehaviour
     WheelCollider frontLeftWheel;
     [SerializeField]
     WheelCollider frontRightWheel;
+    public bool canDrive = true;
 
     GameObject wheelColliders;
     GameObject wheelModels;
@@ -35,6 +36,12 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
+        if (!canDrive)
+        {
+            return;
+        }
+
+
         foreach (WheelCollider wheel in this.gameObject.GetComponentsInChildren<WheelCollider>())
         {
             float speed = wheel.rpm / 60 * wheel.radius * 2 * Mathf.PI;
