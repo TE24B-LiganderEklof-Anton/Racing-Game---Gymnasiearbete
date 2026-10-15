@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class CarController : MonoBehaviour
 {
     float forward = 0;
@@ -18,24 +19,31 @@ public class CarController : MonoBehaviour
     WheelCollider frontLeftWheel;
     [SerializeField]
     WheelCollider frontRightWheel;
+    [SerializeField]
+    Transform steeringWheel;
+    [SerializeField]
+    float steeringWheelMaxAngle = 180;
+    Vector3 steeringWheelDefaultRot;
     public bool canDrive = true;
 
     GameObject wheelColliders;
     GameObject wheelModels;
 
-    Rigidbody rigidBody;
-
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody>();
-        // rigidBody.centerOfMass = new(0,-0.5f,0);
-
         wheelColliders = transform.Find("WheelColliders").gameObject;
         wheelModels = transform.Find("WheelModels").gameObject;
+        steeringWheelDefaultRot = steeringWheel.localEulerAngles;
     }
 
     void Update()
     {
+        float targetRot = steeringWheelDefaultRot.z+(steering*steeringWheelMaxAngle);
+        float difference = targetRot - steeringWheel.localEulerAngles.z;
+        print(difference);
+
+        steeringWheel.localEulerAngles = new Vector3(steeringWheelDefaultRot.x,steeringWheelDefaultRot.y,steeringWheel.localEulerAngles.z+(difference*0.1f));
+        
         if (!canDrive)
         {
             return;
