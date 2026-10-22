@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class CarController : MonoBehaviour
 {
+    [SerializeField]
+    DataFileWriter dataFileWriter;
     float forward = 0;
     float steering = 0;
     [SerializeField]
@@ -38,44 +40,59 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        float targetRot = steeringWheelDefaultRot.z+(steering*steeringWheelMaxAngle);
+        float targetRot = steeringWheelDefaultRot.z + (steering * steeringWheelMaxAngle);
         float difference = targetRot - steeringWheel.localEulerAngles.z;
-        print(difference);
 
-        steeringWheel.localEulerAngles = new Vector3(steeringWheelDefaultRot.x,steeringWheelDefaultRot.y,steeringWheel.localEulerAngles.z+(difference*0.1f));
-        
+        steeringWheel.localEulerAngles = new Vector3(steeringWheelDefaultRot.x, steeringWheelDefaultRot.y, steeringWheel.localEulerAngles.z + (difference * 0.1f));
+
         if (!canDrive)
         {
             return;
         }
 
+        float speed = 0;
+        foreach (WheelCollider wheel in this.gameObject.GetComponentsInChildren<WheelCollider>())
+        {
+            speed += speed = wheel.rpm / 60 * wheel.radius * 2 * Mathf.PI;
+        }
+        speed /= this.gameObject.GetComponentsInChildren<WheelCollider>().Length;
+        float motorTorque = 0;
+        float brakeTorque = 0;
+
+        if ((forward < 0 && speed > 1) || (forward > 0 && speed < -1))
+        {
+            brakeTorque = breakTorque;
+            dataFileWriter.brakeTime += Time.deltaTime;
+        }
+        else if (forward > 0)
+        {
+            motorTorque = torque * forward;
+            brakeTorque = 0;
+            dataFileWriter.driveTime += Time.deltaTime;
+        }
+        else if (forward < 0)
+        {
+            motorTorque = torque * forward * 0.8f;
+            brakeTorque = 0;
+            dataFileWriter.reverseTime += Time.deltaTime;
+        }
+        else if (speed > -1 && speed < 1)
+        {
+            brakeTorque = breakTorque;
+            dataFileWriter.nothingTime += Time.deltaTime;
+        }
+        else
+        {
+            dataFileWriter.nothingTime += Time.deltaTime;
+  
+        }
 
         foreach (WheelCollider wheel in this.gameObject.GetComponentsInChildren<WheelCollider>())
         {
-            float speed = wheel.rpm / 60 * wheel.radius * 2 * Mathf.PI;
 
-            wheel.motorTorque = 0;
-            if ((forward < 0 && speed > 1) || (forward > 0 && speed < -1))
-            {
-                wheel.brakeTorque = breakTorque;
-            }
-            else
-            {
-                if (forward > 0)
-                {
-                    wheel.motorTorque = torque * forward;
-                    wheel.brakeTorque = 0;
-                }
-                else if (forward < 0)
-                {
-                    wheel.motorTorque = torque * forward * 0.8f;
-                    wheel.brakeTorque = 0;
-                }
-                else if (speed > -1 && speed < 1)
-                {
-                    wheel.brakeTorque = breakTorque;
-                }
-            }
+            wheel.motorTorque = motorTorque;
+            wheel.brakeTorque = brakeTorque;
+
             // print(wheel.motorTorque + ":" + wheel.brakeTorque);
         }
         frontRightWheel.steerAngle = turnAngle * steering;
@@ -110,7 +127,7 @@ public class CarController : MonoBehaviour
     {
         // steering = input.Get<Vector2>().x;
         float inputValue = input.Get<Vector2>().x;
-        steering = 1-Mathf.Cos(inputValue*Mathf.PI/2);
+        steering = 1 - Mathf.Cos(inputValue * Mathf.PI / 2);
         if (inputValue < 0)
         {
             steering *= -1;
