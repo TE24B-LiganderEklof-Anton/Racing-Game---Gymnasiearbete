@@ -56,6 +56,7 @@ public class CarController : MonoBehaviour
             speed += speed = wheel.rpm / 60 * wheel.radius * 2 * Mathf.PI;
         }
         speed /= this.gameObject.GetComponentsInChildren<WheelCollider>().Length;
+        print(speed*3.6);
         float motorTorque = 0;
         float brakeTorque = 0;
 
