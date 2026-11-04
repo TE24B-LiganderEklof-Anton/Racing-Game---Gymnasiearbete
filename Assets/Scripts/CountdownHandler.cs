@@ -13,7 +13,10 @@ public class CountdownHandler : MonoBehaviour
     CarController carController;
     [SerializeField]
     TextMeshProUGUI text;
+    [SerializeField]
+    GameObject controls;
     bool done = false;
+    bool started = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +29,7 @@ public class CountdownHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!started) return;
         if (done) return;
         countdownTime -= Time.deltaTime;
         text.SetText(Mathf.Floor(countdownTime).ToString());
@@ -40,5 +44,10 @@ public class CountdownHandler : MonoBehaviour
             }
         }
 
+    }
+    public void StartCountdown()
+    {
+        started = true;
+        controls.SetActive(false);
     }
 }

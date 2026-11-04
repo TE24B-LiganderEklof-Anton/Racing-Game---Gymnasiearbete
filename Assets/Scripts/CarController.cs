@@ -8,6 +8,13 @@ using UnityEngine.InputSystem;
 public class CarController : MonoBehaviour
 {
     [SerializeField]
+    CountdownHandler countdownHandler;
+    [SerializeField]
+    Transform speedometer;
+    [SerializeField]
+    Transform RPMometer;
+    Vector3 speedometerDefaultRot;
+    [SerializeField]
     DataFileWriter dataFileWriter;
     float forward = 0;
     float steering = 0;
@@ -36,6 +43,7 @@ public class CarController : MonoBehaviour
         wheelColliders = transform.Find("WheelColliders").gameObject;
         wheelModels = transform.Find("WheelModels").gameObject;
         steeringWheelDefaultRot = steeringWheel.localEulerAngles;
+        speedometerDefaultRot = speedometer.localEulerAngles;
     }
 
     void Update()
@@ -54,9 +62,9 @@ public class CarController : MonoBehaviour
         foreach (WheelCollider wheel in this.gameObject.GetComponentsInChildren<WheelCollider>())
         {
             speed += speed = wheel.rpm / 60 * wheel.radius * 2 * Mathf.PI;
+            print(wheel.rpm);
         }
         speed /= this.gameObject.GetComponentsInChildren<WheelCollider>().Length;
-        print(speed*3.6);
         float motorTorque = 0;
         float brakeTorque = 0;
 
@@ -85,7 +93,6 @@ public class CarController : MonoBehaviour
         else
         {
             dataFileWriter.nothingTime += Time.deltaTime;
-  
         }
 
         foreach (WheelCollider wheel in this.gameObject.GetComponentsInChildren<WheelCollider>())
@@ -112,17 +119,22 @@ public class CarController : MonoBehaviour
             transform.rotation = rot;
 
         }
+        speedometer.localEulerAngles = new(
+            speedometerDefaultRot.x,
+            speedometerDefaultRot.y,
+            speedometerDefaultRot.z - (speed*2.6f)
+        );
+        RPMometer.localEulerAngles = new(
+            speedometerDefaultRot.x,
+            speedometerDefaultRot.y,
+            speedometerDefaultRot.z - (speed*120/(math.PI*30))
+        );
     }
-    // public void OnMove(InputValue input)
-    // {
-    //     Vector2 moveVector = input.Get<Vector2>();
-    //     forward = moveVector.y;
-    //     steering = moveVector.x;
 
-    // }
     public void OnDrive(InputValue input)
     {
         forward = input.Get<float>();
+        if (forward > 0) countdownHandler.StartCountdown();
     }
     public void OnMove(InputValue input)
     {
@@ -133,6 +145,5 @@ public class CarController : MonoBehaviour
         {
             steering *= -1;
         }
-        // print(inputValue + ":" + steering);
     }
 }

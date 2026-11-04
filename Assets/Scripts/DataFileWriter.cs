@@ -32,8 +32,8 @@ public class DataFileWriter : MonoBehaviour
         string line = $"nothingTime:{nothingTime}|driveTime:{driveTime}|brakeTime:{brakeTime}|reverseTime:{reverseTime}";
         WriteString(line);
     }
-    void OnApplicationQuit()
-    {
-        SaveData();
-    }
+    // void OnApplicationQuit()
+    // {
+    //     SaveData();
+    // }
 }

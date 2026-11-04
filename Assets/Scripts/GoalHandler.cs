@@ -1,12 +1,20 @@
+using TMPro;
 using UnityEngine;
 
 public class GoalHandler : MonoBehaviour
 {
+    [SerializeField]
+    TextMeshProUGUI uiText;
+    [SerializeField]
+    DataFileWriter dataFileWriter;
+    bool goalReached = false;
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.name == "Goal")
+        if (collider.gameObject.name == "Goal" && !goalReached)
         {
-            print("Reached Goal");
+            goalReached = true;
+            uiText.text = "YOU WON!!!";
+            dataFileWriter.SaveData();
         }
     }
 }
