@@ -78,6 +78,7 @@ public class CarController : MonoBehaviour
             motorTorque = torque * forward;
             brakeTorque = 0;
             dataFileWriter.driveTime += Time.deltaTime;
+            dataFileWriter.totalDriveInput += forward*Time.deltaTime;
         }
         else if (forward < 0)
         {

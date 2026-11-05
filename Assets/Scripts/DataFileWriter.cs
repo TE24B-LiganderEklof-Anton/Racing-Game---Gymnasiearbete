@@ -12,8 +12,8 @@ public class DataFileWriter : MonoBehaviour
     public float driveTime = 0;
     public float brakeTime = 0;
     public float reverseTime = 0;
+    public float totalDriveInput = 0;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void WriteString(string line)
     {
         using (StreamWriter sw = new StreamWriter(Application.dataPath + $"/{fileName}.txt",true))
@@ -23,17 +23,15 @@ public class DataFileWriter : MonoBehaviour
     }
     public void SaveData()
     {   
-        int flooringMult = 10^(dataDecimalCount-1);
-        nothingTime = Mathf.Floor(nothingTime*flooringMult)/flooringMult;
-        driveTime = Mathf.Floor(driveTime*flooringMult)/flooringMult;
-        brakeTime = Mathf.Floor(brakeTime*flooringMult)/flooringMult;
-        reverseTime = Mathf.Floor(reverseTime*flooringMult)/flooringMult;
+        // int flooringMult = 10^(dataDecimalCount-1);
+        // nothingTime = Mathf.Floor(nothingTime*flooringMult)/flooringMult;
+        // driveTime = Mathf.Floor(driveTime*flooringMult)/flooringMult;
+        // brakeTime = Mathf.Floor(brakeTime*flooringMult)/flooringMult;
+        // reverseTime = Mathf.Floor(reverseTime*flooringMult)/flooringMult;
+        // float averageDriveInput = Mathf.Floor((totalDriveInput/driveTime)*flooringMult)/flooringMult;
+        float averageDriveInput = totalDriveInput/driveTime;
 
-        string line = $"nothingTime:{nothingTime}|driveTime:{driveTime}|brakeTime:{brakeTime}|reverseTime:{reverseTime}";
+        string line = $"nothingTime:{nothingTime}|driveTime:{driveTime}|brakeTime:{brakeTime}|reverseTime:{reverseTime}|averageDriveInput:{averageDriveInput}";
         WriteString(line);
     }
-    // void OnApplicationQuit()
-    // {
-    //     SaveData();
-    // }
 }

@@ -8218,6 +8218,7 @@ MonoBehaviour:
   driveTime: 0
   brakeTime: 0
   reverseTime: 0
+  totalDriveInput: 0
 --- !u!4 &300043478
 Transform:
   m_ObjectHideFlags: 0
