@@ -1,4 +1,5 @@
 using System.IO;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class DataFileWriter : MonoBehaviour
@@ -13,6 +14,11 @@ public class DataFileWriter : MonoBehaviour
     public float brakeTime = 0;
     public float reverseTime = 0;
     public float totalDriveInput = 0;
+    PermissionsHandler permissionsHandler;
+    void Start()
+    {
+        permissionsHandler = GetComponent<PermissionsHandler>();
+    }
 
     void WriteString(string line)
     {
@@ -32,6 +38,10 @@ public class DataFileWriter : MonoBehaviour
         float averageDriveInput = totalDriveInput/driveTime;
 
         string line = $"nothingTime:{nothingTime}|driveTime:{driveTime}|brakeTime:{brakeTime}|reverseTime:{reverseTime}|averageDriveInput:{averageDriveInput}";
+        #if UNITY_ANDROID && !UNITY_EDITOR
+        permissionsHandler.SaveTextToDocuments(fileName, line);
+        #else
         WriteString(line);
+        #endif
     }
 }

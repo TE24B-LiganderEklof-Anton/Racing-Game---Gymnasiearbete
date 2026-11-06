@@ -1,1 +1,0 @@
-nothingTime:26.06759|driveTime:124.3932|brakeTime:2.484144|reverseTime:1.482328|averageDriveInput:0.9366058
